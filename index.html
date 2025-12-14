@@ -1,128 +1,144 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Robert Risk - Clarity System Solutions">
     <meta name="author" content="Robert Risk">
-    <!-- <meta name="generator" content="Jekyll v3.8.6"> -->
-    <meta name="robots" content="index, follow" />
     <title>Robert Risk</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/cover/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-    <!-- Bootstrap core CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <!-- Font Awesom -->
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-<script src="https://kit.fontawesome.com/8a0d40a933.js" crossorigin="anonymous"></script>
-
-    <!-- Favicons -->
-<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-<link rel="manifest" href="favicon/site.webmanifest">
-
-<!-- <link rel="manifest" href="manifest.json"> -->
-<!-- <link rel="mask-icon" href="/docs/4.4/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
-<link rel="icon" href="/docs/4.4/assets/img/favicons/favicon.ico">
- --><meta name="msapplication-config" content="none"/>
-<!-- <meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml"> -->
-<meta name="theme-color" content="#563d7c">
-
+    <script src="https://kit.fontawesome.com/8a0d40a933.js" crossorigin="anonymous"></script>
 
     <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
+        /* --- CSS Reset & Variables --- */
+        :root {
+            --bg-gradient-start: #2b2e4a;
+            --bg-gradient-end: #53357a; /* Nod to your original purple */
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --text-main: #ffffff;
+            --text-muted: #d1d1d1;
+            --accent-color: #00d4ff; /* A modern cyan accent */
+            --font-main: 'Inter', sans-serif;
         }
-      }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            overflow: hidden; /* Prevents scrollbars on small content */
+        }
+
+        /* --- The Business Card Container --- */
+        .card-container {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px); /* Glassmorphism effect */
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* --- Typography --- */
+        h1 {
+            font-weight: 800;
+            font-size: 2.5rem;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-weight: 400;
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+        }
+
+        .description {
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            font-size: 0.95rem;
+        }
+
+        .description strong {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            background-color: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-gradient-start);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Mobile Tweaks --- */
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; }
+            .card-container { padding: 2rem 1.5rem; }
+        }
     </style>
-    <!-- Custom styles for this template -->
-    <link href="cover.css" rel="stylesheet">
-  </head>
-  <body class="text-center">
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-  <header class="masthead mb-auto">
-    <div class="inner">
-      <!-- <h3 class="masthead-brand">Cover</h3> -->
-      <!-- <nav class="nav nav-masthead justify-content-center">
-        <a class="nav-link active" href="#">Home</a>
-        <a class="nav-link" href="#">Features</a>
-        <a class="nav-link" href="#">Contact</a>
-      </nav> -->
-    </div>
-  </header>
+</head>
+<body>
 
-  <main role="main" class="inner cover">
-    <h1 class="cover-heading">Robert Risk</h1>
-    <!-- <p class="lead"><i>Web Developer</i></p> -->
-    <p>
-        <em>Clarity System Solutions</em>
-        <!-- <button type="button" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#exampleModalCenter">
-        Clarity System Solutions
-        </button> -->
-    </p>
+    <main class="card-container">
+        <h1>Robert Risk</h1>
+        <h2>Clarity System Solutions</h2>
 
-    <!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-  Launch demo modal
-</button> -->
+        <p class="description">
+            We provide technical services to eliminate friction and chaos.
+            <br><br>
+            Engineering solutions with a clear focus on <strong>automation</strong>, <strong>data integrity</strong>, and <strong>fractional AI implementation</strong>.
+        </p>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Clarity System Solutions</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            
-            <p>We provide technical services to eliminate friction and chaos in your business.</p>
+        <a class="btn" href="https://calendly.com/take1risk/30min" target="_blank" rel="noopener noreferrer">
+            Book Free Consultation
+        </a>
+    </main>
 
-            <p>We engineer solutions with a clear focus on automation, data integrity, and fractional AI implementation.</p>
-
-            <p>Elevate efficiency with a clear system.</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- <p class="lead">
-      <a href="https://github.com/brokerstir"> <i class="fa fa-github fa-lg"></i></a>
-      &emsp;
-      <a href="https://www.linkedin.com/in/robertrisk/"> <i class="fa fa-linkedin fa-lg"></i></i></a>
-      &emsp;
-      <a href="https://www.certmetrics.com/amazon/public/badge.aspx?i=1&t=c&d=2019-08-24&ci=AWS00567870"> <i class="fab fa-aws fa-lg"></i></i></a>
-    </p> -->
-
-    <p class="lead">
-      <a class="btn btn-outline-info" href="https://calendly.com/take1risk/30min" role="button">Book a 30 Min. Free Consultation</a>
-    </p>
-  </main>
-
-  <footer class="mastfoot mt-auto">
-    <!-- <div class="inner">
-      <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
-    </div> -->
-  </footer>
-</div>
 </body>
 </html>
