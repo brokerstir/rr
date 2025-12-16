@@ -17,98 +17,139 @@
         /* --- CSS Reset & Variables --- */
         :root {
             --bg-gradient-start: #2b2e4a;
-            --bg-gradient-end: #53357a; /* Nod to your original purple */
+            --bg-gradient-end: #53357a;
             --card-bg: rgba(255, 255, 255, 0.1);
+            --item-bg: rgba(255, 255, 255, 0.05);
+            --item-hover: rgba(255, 255, 255, 0.15);
             --text-main: #ffffff;
             --text-muted: #d1d1d1;
-            --accent-color: #00d4ff; /* A modern cyan accent */
+            --accent-color: #00d4ff;
             --font-main: 'Inter', sans-serif;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: var(--font-main);
             background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
-            height: 100vh;
+            min-height: 100vh; /* Changed to min-height to allow scrolling if list gets long */
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--text-main);
-            overflow: hidden; /* Prevents scrollbars on small content */
+            padding: 20px; /* Padding for mobile edges */
         }
 
-        /* --- The Business Card Container --- */
+        /* --- The Main Card --- */
         .card-container {
             background: var(--card-bg);
-            backdrop-filter: blur(15px); /* Glassmorphism effect */
+            backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 20px;
             padding: 3rem 2rem;
-            max-width: 450px;
-            width: 90%;
+            max-width: 480px;
+            width: 100%;
             text-align: center;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             animation: fadeIn 1s ease-out;
         }
 
         /* --- Typography --- */
-        h1 {
-            font-weight: 800;
-            font-size: 2.5rem;
-            letter-spacing: -1px;
-            margin-bottom: 0.5rem;
-        }
-
-        h2 {
-            font-weight: 400;
-            font-size: 1.1rem;
-            color: var(--accent-color);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 2rem;
-        }
+        h1 { font-weight: 800; font-size: 2.5rem; letter-spacing: -1px; margin-bottom: 0.25rem; }
+        h2 { font-weight: 400; font-size: 1rem; color: var(--accent-color); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1.5rem; }
 
         .description {
             font-weight: 300;
             line-height: 1.6;
             color: var(--text-muted);
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             font-size: 0.95rem;
         }
+        .description strong { color: var(--text-main); font-weight: 600; }
 
-        .description strong {
-            color: var(--text-main);
-            font-weight: 600;
-        }
-
-        /* --- Buttons --- */
-        .btn {
+        /* --- Primary Action Button --- */
+        .btn-primary {
             display: inline-block;
             text-decoration: none;
-            background-color: transparent;
+            background-color: var(--accent-color);
             border: 2px solid var(--accent-color);
-            color: var(--accent-color);
-            padding: 12px 28px;
+            color: var(--bg-gradient-start);
+            padding: 12px 30px;
             border-radius: 50px;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 0.9rem;
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
+            margin-bottom: 2.5rem;
         }
 
-        .btn:hover {
-            background-color: var(--accent-color);
-            color: var(--bg-gradient-start);
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--accent-color);
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
         }
+
+        /* --- Divider --- */
+        .divider {
+            height: 1px;
+            background: rgba(255,255,255,0.2);
+            margin: 0 auto 1.5rem auto;
+            width: 50%;
+        }
+
+        .section-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        /* --- Project/Article Links List --- */
+        .link-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .link-item {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            background: var(--item-bg);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 12px 20px;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+            color: var(--text-main);
+            text-align: left;
+        }
+
+        .link-item:hover {
+            background: var(--item-hover);
+            transform: scale(1.02);
+            border-color: var(--accent-color);
+        }
+
+        .link-icon {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            margin-right: 15px;
+            width: 25px;
+            text-align: center;
+        }
+
+        .link-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .link-title { font-weight: 600; font-size: 0.95rem; }
+        .link-sub { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
 
         /* --- Animations --- */
         @keyframes fadeIn {
@@ -116,7 +157,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- Mobile Tweaks --- */
         @media (max-width: 480px) {
             h1 { font-size: 2rem; }
             .card-container { padding: 2rem 1.5rem; }
@@ -130,14 +170,44 @@
         <h2>Clarity System Solutions</h2>
 
         <p class="description">
-            We provide technical services to eliminate friction and chaos.
-            <br><br>
-            Engineering solutions with a clear focus on <strong>automation</strong>, <strong>data integrity</strong>, and <strong>fractional AI implementation</strong>.
+            Eliminating friction and chaos through <strong>automation</strong>, <strong>data integrity</strong>, and <strong>fractional AI</strong>.
         </p>
 
-        <a class="btn" href="https://calendly.com/take1risk/30min" target="_blank" rel="noopener noreferrer">
+        <a class="btn-primary" href="https://calendly.com/take1risk/30min" target="_blank">
             Book Free Consultation
         </a>
+
+        <div class="divider"></div>
+
+        <div class="section-title">Projects & Insights</div>
+
+        <div class="link-list">
+
+            <a href="https://your-joke-app-url.com" class="link-item" target="_blank">
+                <div class="link-icon"><i class="fa-solid fa-face-laugh-beam"></i></div>
+                <div class="link-text">
+                    <span class="link-title">AI Joke Generator</span>
+                    <span class="link-sub">A React & OpenAI Experiment</span>
+                </div>
+            </a>
+
+            <a href="https://linkedin.com/in/robertrisk/detail/recent-activity/posts/" class="link-item" target="_blank">
+                <div class="link-icon"><i class="fa-brands fa-linkedin"></i></div>
+                <div class="link-text">
+                    <span class="link-title">The Future of Fractional AI</span>
+                    <span class="link-sub">Read on LinkedIn</span>
+                </div>
+            </a>
+
+            <a href="#" class="link-item" target="_blank">
+                <div class="link-icon"><i class="fa-solid fa-file-lines"></i></div>
+                <div class="link-text">
+                    <span class="link-title">Data Integrity 101</span>
+                    <span class="link-sub">Why clean data matters</span>
+                </div>
+            </a>
+
+        </div>
     </main>
 
 </body>
