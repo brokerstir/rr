@@ -1,0 +1,159 @@
+/* style.css */
+
+/* --- CSS Reset & Variables --- */
+:root {
+    /* "Magnetic" Palette */
+    --bg-gradient-start: #0A2342; /* Deep Navy from Logo */
+    --bg-gradient-end: #000000;   /* Fades to Black for "Void" depth */
+    
+    /* Glassmorphism Backgrounds */
+    --card-bg: rgba(10, 35, 66, 0.75); /* Dark Navy Glass */
+    --item-bg: rgba(255, 255, 255, 0.03);
+    --item-hover: rgba(197, 160, 89, 0.15); /* Faint Gold Tint on Hover */
+    
+    /* Typography Colors */
+    --text-main: #ffffff;
+    --text-muted: #A5D8E8; /* Light Cyan (from logo ring) for "Data" feel */
+    
+    /* Action Color */
+    --accent-color: #C5A059; /* Metallic Gold (Magnetism) */
+    
+    --font-main: 'Inter', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: var(--font-main);
+    background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-main);
+    padding: 20px;
+}
+
+/* --- The Main Card --- */
+.card-container {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(165, 216, 232, 0.1); /* Very subtle Cyan border */
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); /* Deeper shadow for depth */
+    animation: fadeIn 1s ease-out;
+}
+
+/* --- Typography --- */
+h1 { font-weight: 800; font-size: 2.5rem; letter-spacing: -1px; margin-bottom: 0.25rem; }
+h2 { font-weight: 400; font-size: 1rem; color: var(--accent-color); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1.5rem; }
+
+.description {
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+.description strong { color: var(--text-main); font-weight: 600; }
+
+/* --- Primary Action Button --- */
+.btn-primary {
+    display: inline-block;
+    text-decoration: none;
+    background-color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    color: #0A2342; /* Dark Navy Text for Contrast against Gold */
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 2.5rem;
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    color: var(--accent-color);
+    transform: translateY(-2px);
+    /* Gold Glow instead of Cyan */
+    box-shadow: 0 0 20px rgba(197, 160, 89, 0.4); 
+}
+
+/* --- Divider --- */
+.divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-color), transparent); /* Gold fade */
+    opacity: 0.3;
+    margin: 0 auto 1.5rem auto;
+    width: 60%;
+}
+
+.section-title {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+
+/* --- Project/Article Links List --- */
+.link-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.link-item {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    background: var(--item-bg);
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 12px 20px;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    color: var(--text-main);
+    text-align: left;
+}
+
+.link-item:hover {
+    background: var(--item-hover);
+    transform: scale(1.02);
+    border-color: var(--accent-color);
+}
+
+.link-icon {
+    font-size: 1.2rem;
+    color: var(--accent-color);
+    margin-right: 15px;
+    width: 25px;
+    text-align: center;
+}
+
+.link-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.link-title { font-weight: 600; font-size: 0.95rem; }
+.link-sub { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+
+/* --- Animations --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 480px) {
+    h1 { font-size: 2rem; }
+    .card-container { padding: 2rem 1.5rem; }
+}
