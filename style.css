@@ -157,3 +157,38 @@ h2 { font-weight: 400; font-size: 1rem; color: var(--accent-color); text-transfo
     h1 { font-size: 2rem; }
     .card-container { padding: 2rem 1.5rem; }
 }
+
+/* Necessary for the shuffle logic */
+.anagram-box {
+    position: relative;
+    /* Ensure the container doesn't collapse when children go absolute */
+    display: block;
+    width: 100%;
+    /* Prevent text wrapping during calculation to ensure accurate mapping */
+    white-space: nowrap;
+}
+
+.char-unit {
+    display: inline-block;
+    will-change: transform, top, left;
+    /* Ensure spaces have width for calculation */
+    white-space: pre;
+}
+
+.anagram-dummy {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    pointer-events: none;
+    z-index: -1;
+    /* Inherit alignment from parent */
+    text-align: inherit;
+}
+
+/* Adds a subtle "energy" glow to letters while they are moving */
+.char-unit[style*="position: absolute"] {
+    color: var(--accent-color);
+    text-shadow: 0 0 10px rgba(197, 160, 89, 0.5);
+}
