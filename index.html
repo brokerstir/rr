@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-    <script src="https://kit.fontawesome.com/8a0d40a933.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -23,10 +23,10 @@
         <h2 class="anagram-box" data-final="CLARITY SYSTEM SOLUTIONS">STATELY SILICON MISSIONS</h2>
 
         <p class="description">
-            Eliminating friction and chaos through <strong>automation</strong>, <strong>data integrity</strong>, and <strong>fractional AI</strong>.
+            Building the open-source <strong>trust layer</strong> for the <strong>AI economy</strong>.
         </p>
 
-        <a class="btn-primary" href="https://calendly.com/take1risk/30min" target="_blank">
+        <a class="btn-primary" href="https://calendar.app.google/hZtz5z1eMdbPvZrB8" target="_blank">
             Book Free Consultation
         </a>
 
@@ -34,33 +34,68 @@
 
         <div class="section-title">Projects & Insights</div>
 
-        <div class="link-list">
+        <div id="menu-view" class="fade-wrapper">
+            <div class="link-list">
+                <a href="#" class="link-item" data-target="content-verifai">
+                    <div class="link-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
+                    <div class="link-text">
+                        <span class="link-title">VerifAI Project &bull; Solana Node</span>
+                        <span class="link-sub">Open Source &bull; x402 Payment Demo</span>
+                    </div>
+                    <div class="arrow-icon"><i class="fa-solid fa-chevron-right"></i></div>
+                </a>
 
-            <a href="https://your-joke-app-url.com" class="link-item" target="_blank">
-                <div class="link-icon"><i class="fa-solid fa-face-laugh-beam"></i></div>
-                <div class="link-text">
-                    <span class="link-title">AI Joke Generator</span>
-                    <span class="link-sub">A React & OpenAI Experiment</span>
-                </div>
-            </a>
+                <a href="#" class="link-item" data-target="content-clarity">
+                    <div class="link-icon"><i class="fa-solid fa-diagram-project"></i></div>
+                    <div class="link-text">
+                        <span class="link-title">Roadmap to the Clarity Protocol</span>
+                        <span class="link-sub">Because Bots Don't Have Bank Accounts</span>
+                    </div>
+                    <div class="arrow-icon"><i class="fa-solid fa-chevron-right"></i></div>
+                </a>
 
-            <a href="https://linkedin.com/in/robertrisk/detail/recent-activity/posts/" class="link-item" target="_blank">
-                <div class="link-icon"><i class="fa-brands fa-linkedin"></i></div>
-                <div class="link-text">
-                    <span class="link-title">The Future of Fractional AI</span>
-                    <span class="link-sub">Read on LinkedIn</span>
-                </div>
-            </a>
-
-            <a href="#" class="link-item" target="_blank">
-                <div class="link-icon"><i class="fa-solid fa-file-lines"></i></div>
-                <div class="link-text">
-                    <span class="link-title">Data Integrity 101</span>
-                    <span class="link-sub">Why clean data matters</span>
-                </div>
-            </a>
-
+                <a href="#" class="link-item" data-target="content-vision">
+                    <div class="link-icon"><i class="fa-solid fa-atom"></i></div>
+                    <div class="link-text">
+                        <span class="link-title">The Future of Autonomous Commerce</span>
+                        <span class="link-sub">How we Safely Merge the Blockchain with AI</span>
+                    </div>
+                    <div class="arrow-icon"><i class="fa-solid fa-chevron-right"></i></div>
+                </a>
+            </div>
         </div>
+
+        <div id="detail-view" class="fade-wrapper" style="display: none;">
+            <button id="back-btn" class="back-nav">
+                <i class="fa-solid fa-arrow-left"></i> Back
+            </button>
+            <div id="dynamic-content-area">
+                </div>
+        </div>
+
+        <template id="content-verifai">
+            <h3>VerifAI Demo</h3>
+            <div class="video-container">
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/a1JlZ9TsL2U?si=fuTgjgIn75cFBS7p" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            <p>This node implements the <strong>x402 'Payment Required'</strong> standard on Solana. It allows AI agents to autonomously fund and request tasks in real-time.</p>
+            <a href="https://github.com/brokerstir/verifai-sol-node" target="_blank" class="repo-btn">
+                <i class="fa-brands fa-github"></i> View Source Code
+            </a>
+        </template>
+
+        <template id="content-clarity">
+            <h3>The Clarity Protocol</h3>
+            <p>In the coming <strong>AI economy</strong>, bots need to pay for compute, data, and API access. Traditional banking rails are too slow and expensive for micro-transactions.</p>
+            <p>Clarity is being built as that <strong>financial plumbing</strong> that merges blockchain efficiency with AI autonomy, enabling sub-cent transactions that make this evolving economy viable.</p>
+        </template>
+
+        <template id="content-vision">
+            <h3>Autonomous Commerce</h3>
+            <p>We are moving toward a world where systems run without human intervention. To prevent chaos, these systems need a <strong>trust layer</strong>.</p>
+            <p>This trust layer will serve as the infrastructure that ensures every <strong>machine interaction</strong> is verified, logged, and settled on-chain—eliminating operational friction entirely.</p>
+        </template>
+
     </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

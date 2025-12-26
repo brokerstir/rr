@@ -146,4 +146,32 @@ $(document).ready(function() {
             });
         });
     }
+
+    // 1. Handle Link Clicks
+    $('.link-item').on('click', function(e) {
+        e.preventDefault();
+        const targetID = $(this).data('target');
+        const contentHTML = $('#' + targetID).html();
+
+        // Smooth transition
+        $('#menu-view').css('opacity', '0');
+        setTimeout(() => {
+            $('#menu-view').hide();
+            $('#dynamic-content-area').html(contentHTML);
+            $('#detail-view').show().css('opacity', '1');
+
+            // Scroll to top of card in case they were scrolled down
+            $('.card-container').animate({ scrollTop: 0 }, 300);
+        }, 200);
+    });
+
+    // 2. Handle Back Button
+    $('#back-btn').on('click', function() {
+        $('#detail-view').css('opacity', '0');
+        setTimeout(() => {
+            $('#detail-view').hide();
+            $('#dynamic-content-area').empty();
+            $('#menu-view').show().css('opacity', '1');
+        }, 200);
+    });
 });

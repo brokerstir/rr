@@ -26,6 +26,7 @@
 body {
     font-family: var(--font-main);
     background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+    background-attachment: fixed; /* Keeps gradient smooth on scroll */
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -39,14 +40,41 @@ body {
     background: var(--card-bg);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(165, 216, 232, 0.1); /* Very subtle Cyan border */
+    border: 1px solid rgba(165, 216, 232, 0.1);
     border-radius: 20px;
     padding: 3rem 2rem;
-    max-width: 480px;
     width: 100%;
+    /* Default Mobile Width */
+    max-width: 480px;
     text-align: center;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); /* Deeper shadow for depth */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
     animation: fadeIn 1s ease-out;
+    position: relative;
+    min-height: 400px;
+    transition: all 0.4s ease; /* Smooth expansion when desktop loads */
+}
+
+/* --- Responsive Desktop Adjustment --- */
+@media (min-width: 768px) {
+    .card-container {
+        /* Expands the layout for Laptops/Desktops */
+        max-width: 900px;
+        padding: 4rem;
+    }
+
+    .link-list {
+        /* Displays links in a 2-column grid on large screens */
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .description {
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 1.1rem;
+    }
 }
 
 /* --- Typography --- */
@@ -68,7 +96,7 @@ h2 { font-weight: 400; font-size: 1rem; color: var(--accent-color); text-transfo
     text-decoration: none;
     background-color: var(--accent-color);
     border: 1px solid var(--accent-color);
-    color: #0A2342; /* Dark Navy Text for Contrast against Gold */
+    color: #0A2342;
     padding: 12px 30px;
     border-radius: 50px;
     font-weight: 700;
@@ -83,14 +111,13 @@ h2 { font-weight: 400; font-size: 1rem; color: var(--accent-color); text-transfo
     background-color: transparent;
     color: var(--accent-color);
     transform: translateY(-2px);
-    /* Gold Glow instead of Cyan */
-    box-shadow: 0 0 20px rgba(197, 160, 89, 0.4); 
+    box-shadow: 0 0 20px rgba(197, 160, 89, 0.4);
 }
 
 /* --- Divider --- */
 .divider {
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--accent-color), transparent); /* Gold fade */
+    background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
     opacity: 0.3;
     margin: 0 auto 1.5rem auto;
     width: 60%;
@@ -153,42 +180,115 @@ h2 { font-weight: 400; font-size: 1rem; color: var(--accent-color); text-transfo
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* --- Mobile Specific Overrides --- */
 @media (max-width: 480px) {
     h1 { font-size: 2rem; }
     .card-container { padding: 2rem 1.5rem; }
 }
 
-/* Necessary for the shuffle logic */
+/* --- Anagram/Functional Styles --- */
 .anagram-box {
     position: relative;
-    /* Ensure the container doesn't collapse when children go absolute */
     display: block;
     width: 100%;
-    /* Prevent text wrapping during calculation to ensure accurate mapping */
     white-space: nowrap;
 }
 
 .char-unit {
     display: inline-block;
     will-change: transform, top, left;
-    /* Ensure spaces have width for calculation */
     white-space: pre;
 }
 
 .anagram-dummy {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 0; left: 0;
     width: 100%;
     opacity: 0;
     pointer-events: none;
     z-index: -1;
-    /* Inherit alignment from parent */
     text-align: inherit;
 }
 
-/* Adds a subtle "energy" glow to letters while they are moving */
 .char-unit[style*="position: absolute"] {
     color: var(--accent-color);
     text-shadow: 0 0 10px rgba(197, 160, 89, 0.5);
+}
+
+.back-nav {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-family: var(--font-main);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+    transition: color 0.2s ease;
+}
+
+.back-nav:hover { color: var(--accent-color); }
+
+.repo-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent-color);
+    color: #0A2342;
+    padding: 12px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.repo-btn:hover {
+    background: transparent;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    box-shadow: 0 0 15px rgba(197, 160, 89, 0.3);
+}
+
+.arrow-icon {
+    margin-left: auto;
+    color: #ccc;
+    font-size: 0.8rem;
+}
+
+#dynamic-content-area {
+    text-align: left;
+    padding: 10px 5px;
+    line-height: 1.6;
+    color: var(--text-main);
+}
+
+#dynamic-content-area h3 {
+    margin-top: 0;
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+#dynamic-content-area p {
+    margin-bottom: 1.2rem;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.video-container {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.1);
 }
