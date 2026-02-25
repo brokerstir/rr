@@ -117,7 +117,7 @@ $(document).ready(function() {
                     top: newPos.top,
                     left: newPos.left
                 }, {
-                    duration: 2000,
+                    duration: 2500,
                     easing: 'linear', // You can change this to 'linear' or custom bezier if using jQuery UI
                     complete: function() {
                         def.resolve();

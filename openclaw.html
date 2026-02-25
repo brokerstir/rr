@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenClaw VPS Setup | Robert Risk</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="card-container documentation-card">
+        <a href="index.html" class="back-nav">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Back to Intelligence Hub
+        </a>
+
+        <header>
+            <h1>OpenClaw VPS Implementation</h1>
+            <h2>Refined Deployment Strategy (2026)</h2>
+            <p class="description">A step-by-step technical guide for deploying OpenClaw on a Virtual Private Server. Optimized for <strong>Gemini 2.5 Flash</strong>.</p>
+        </header>
+
+        <div class="divider"></div>
+
+        <section class="doc-section">
+            <div class="section-title">Discernment & Audit</div>
+            <div class="audit-grid">
+                <div class="audit-item success-border">
+                    <span class="audit-label">What Works</span>
+                    <ul>
+                        <li>Non-root user security architecture</li>
+                        <li>Persistent volumes for browser cache</li>
+                        <li>Git/Telegram ENV integration</li>
+                        <li>Official docker-setup.sh onboarding</li>
+                    </ul>
+                </div>
+                <div class="audit-item alert-border">
+                    <span class="audit-label">Fixed Issues</span>
+                    <ul>
+                        <li>Port exposure (now bound to localhost)</li>
+                        <li>Invalid Playwright commands corrected</li>
+                        <li>Missing Telegram pairing approval added</li>
+                        <li>Updated 2026 Model naming conventions</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="doc-section">
+            <div class="section-title">Implementation Steps</div>
+
+            <div class="step-wrapper">
+                <h3>01. Prerequisites</h3>
+                <p class="step-desc">A fresh Ubuntu VPS (2GB+ RAM), Gemini API Key, and Telegram Bot Token are required.</p>
+                <div class="code-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># Generate your gateway token locally
+openssl rand -hex 32</code></pre>
+                </div>
+
+                <h3>02. Host Environment Setup</h3>
+                <p class="step-desc">SSH as root to install Docker and create a secure service user.</p>
+                <div class="code-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code>apt-get update && apt-get install -y ca-certificates curl git
+curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh
+
+adduser clawuser
+usermod -aG sudo docker clawuser
+su - clawuser
+
+sudo ufw allow 22/tcp && sudo ufw enable</code></pre>
+                </div>
+
+                <h3>03. Repo & Permissions</h3>
+                <div class="code-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code>mkdir -p ~/openclaw; cd ~/openclaw
+git clone https://github.com/openclaw/openclaw.git repo
+cd repo
+
+mkdir -p ~/.openclaw ~/.openclaw/workspace ~/openclaw/browser_cache
+sudo chown -R 1000:1000 ~/.openclaw ~/openclaw/browser_cache</code></pre>
+                </div>
+
+                <h3>04. Configuration (.env)</h3>
+                <p class="step-desc">Create the .env file in ~/openclaw/repo. Use Gemini 2.5 Flash for cost efficiency.</p>
+                <div class="code-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code>OPENCLAW_GATEWAY_TOKEN=your_token_here
+OPENCLAW_CONFIG_DIR=/home/clawuser/.openclaw
+OPENCLAW_WORKSPACE_DIR=/home/clawuser/.openclaw/workspace
+GEMINI_API_KEY=your_key
+GEMINI_MODEL=gemini-2.5-flash
+TELEGRAM_BOT_TOKEN=your_bot_token
+ALLOWED_TELEGRAM_IDS=your_user_id</code></pre>
+                </div>
+
+                <h3>05. Port & Security Hardening</h3>
+                <p class="step-desc">Edit docker-compose.yml to bind the port to localhost only.</p>
+                <div class="code-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code>ports:
+  - "127.0.0.1:18789:18789"
+command: ["node", "dist/index.js", "gateway", "--bind", "lan", "--port", "18789"]</code></pre>
+                </div>
+
+                <h3>06. Initialization</h3>
+                <div class="code-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code>./docker-setup.sh
+docker compose logs -f openclaw-gateway</code></pre>
+                </div>
+
+                <h3>07. Browser Dependency Install</h3>
+                <div class="code-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code>docker compose exec -u root -e PLAYWRIGHT_BROWSERS_PATH=/home/node/.cache/ms-playwright openclaw-gateway node node_modules/playwright-core/cli.js install --with-deps chromium
+sudo chown -R 1000:1000 ~/openclaw/browser_cache
+docker compose restart openclaw-gateway</code></pre>
+                </div>
+
+                <h3>08. Telegram Pairing</h3>
+                <p class="step-desc">Message your bot /start, get the code, and approve it via CLI.</p>
+                <div class="code-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code>docker compose run --rm openclaw-cli channels add --channel telegram --token "${TELEGRAM_BOT_TOKEN}"
+# Replace CODE with the one from your bot
+docker compose run --rm openclaw-cli pairing approve telegram CODE
+docker compose restart openclaw-gateway</code></pre>
+                </div>
+
+                <h3>09. Testing & Maintenance</h3>
+                <p class="step-desc">Access the dashboard via SSH tunnel and run weekly updates.</p>
+                <div class="code-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># SSH Tunnel for Dashboard
+ssh -N -L 18789:127.0.0.1:18789 clawuser@your-vps-ip
+
+# Weekly Update
+git pull && ./docker-setup.sh && docker compose restart openclaw-gateway</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="divider"></div>
+            <p class="link-sub" style="text-align: center;">&copy; 2026 robert risk. clarity system solutions.</p>
+        </footer>
+    </div>
+
+    <script>
+        function copyCode(button) {
+            const pre = button.nextElementSibling;
+            const text = pre.innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.innerText;
+                button.innerText = 'COPIED';
+                button.style.color = '#C5A059';
+                setTimeout(() => {
+                    button.innerText = originalText;
+                    button.style.color = '';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
